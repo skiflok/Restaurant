@@ -7,14 +7,12 @@ public class Tablet {
         this.tableNumber = tableNumber;
     }
 
-    public void createOrder(){
-
-    }
+//    public void createOrder() {
+//
+//    }
 
     @Override
     public String toString() {
-        return "Tablet{" +
-                "tableNumber=" + tableNumber +
-                '}';
+        return "{number=" + tableNumber + "}";
     }
 }

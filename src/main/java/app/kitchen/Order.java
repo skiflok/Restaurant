@@ -20,10 +20,11 @@ public class Order {
         if (dishes.isEmpty()) {
             return "";
         } else {
-            return "Order{" +
-                    "tablet=" + tablet +
-                    ", dishes=" + dishes +
-                    '}';
+            return "Your order: " + dishes + " of Tablet" + tablet;
+//            return "Order{" +
+//                    "tablet=" + tablet +
+//                    ", dishes=" + dishes +
+//                    '}';
         }
     }
 }

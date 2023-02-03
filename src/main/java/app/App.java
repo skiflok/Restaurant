@@ -3,14 +3,12 @@ package app;
 
 import app.kitchen.Dish;
 
+import java.io.IOException;
+
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ConsoleHelper.writeMessage("it's a restaurant Restaurant");
-        ConsoleHelper.writeMessage("it's our dishes");
-        ConsoleHelper.writeMessage(Dish.allDishesToString());
-        ConsoleHelper.writeMessage("please select dishes, to complete enter \"exit\"");
-
-
+        ConsoleHelper.getAllDishesForOrder();
     }
 }
 

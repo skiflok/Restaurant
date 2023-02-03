@@ -15,4 +15,15 @@ public class Order {
         this.dishes = ConsoleHelper.getAllDishesForOrder();
     }
 
+    @Override
+    public String toString() {
+        if (dishes.isEmpty()) {
+            return "";
+        } else {
+            return "Order{" +
+                    "tablet=" + tablet +
+                    ", dishes=" + dishes +
+                    '}';
+        }
+    }
 }

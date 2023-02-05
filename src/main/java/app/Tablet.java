@@ -17,10 +17,11 @@ public class Tablet {
     }
 
     public void createOrder()  {
+        logger.log(Level.INFO, "test");
         try {
             this.order = new Order(this);
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Console is unavailable.");
+            logger.log(Level.SEVERE, "Console is unavailable.", e);
         }
 
     }

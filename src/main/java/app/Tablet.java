@@ -17,13 +17,13 @@ public class Tablet {
     }
 
     public void createOrder()  {
-        logger.log(Level.INFO, "test");
+//        logger.log(Level.INFO, "test");
         try {
             this.order = new Order(this);
+            ConsoleHelper.writeMessage(order.toString());
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Console is unavailable.", e);
         }
-
     }
 
     @Override

@@ -21,10 +21,6 @@ public class Order {
             return "";
         } else {
             return "Your order: " + dishes + " of Tablet" + tablet;
-//            return "Order{" +
-//                    "tablet=" + tablet +
-//                    ", dishes=" + dishes +
-//                    '}';
         }
     }
 }

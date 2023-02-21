@@ -2,6 +2,7 @@ package app;
 
 
 import app.kitchen.Cook;
+import app.kitchen.Waiter;
 
 import java.io.*;
 import java.util.logging.Logger;
@@ -19,8 +20,10 @@ public class App {
         ConsoleHelper.writeMessage("it's a restaurant Restaurant");
 
         Tablet tablet1 = new Tablet(1);
-        Cook cook = new Cook("qwerty");
+        Cook cook = new Cook("Cook_1");
         tablet1.addObserver(cook);
+        Waiter waiter = new Waiter();
+        cook.addObserver(waiter);
 
         for (int i = 0; i < 1; ++i) {
             tablet1.createOrder();

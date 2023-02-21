@@ -3,10 +3,11 @@ package app.kitchen;
 import app.ConsoleHelper;
 
 import java.io.IOException;
+import java.io.ObjectStreamException;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Cook implements Observer {
+public class Cook extends Observable implements Observer {
 
     String name;
 
@@ -22,7 +23,9 @@ public class Cook implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        ConsoleHelper.writeMessage("Start cooking - " + arg);
+    public void update(Observable o, Object order) {
+        ConsoleHelper.writeMessage("Start cooking - " + order);
+        setChanged();
+        notifyObservers(order);
     }
 }

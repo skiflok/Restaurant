@@ -19,15 +19,14 @@ public class App {
         ConsoleHelper.writeMessage("it's a restaurant Restaurant");
 
         Tablet tablet1 = new Tablet(1);
+        Cook cook = new Cook("qwerty");
+        tablet1.addObserver(cook);
 
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 1; ++i) {
             tablet1.createOrder();
             is.reset();
         }
         System.setIn(sysInBackup);
-
-        Cook cook = new Cook("qwerty");
-        System.out.println(cook);
 
     }
 }

@@ -1,6 +1,12 @@
 package app.kitchen;
 
-public class Cook {
+import app.ConsoleHelper;
+
+import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
+
+public class Cook implements Observer {
 
     String name;
 
@@ -13,5 +19,10 @@ public class Cook {
         return "Cook{" +
                 "name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        ConsoleHelper.writeMessage("Start cooking - " + arg);
     }
 }

@@ -1,6 +1,8 @@
 package app;
 
 
+import app.kitchen.Cook;
+
 import java.io.*;
 import java.util.logging.Logger;
 
@@ -22,8 +24,10 @@ public class App {
             tablet1.createOrder();
             is.reset();
         }
-
         System.setIn(sysInBackup);
+
+        Cook cook = new Cook("qwerty");
+        System.out.println(cook);
 
     }
 }

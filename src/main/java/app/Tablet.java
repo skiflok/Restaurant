@@ -1,5 +1,6 @@
 package app;
 
+import app.ad.AdvertisementManager;
 import app.kitchen.Order;
 
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class Tablet extends Observable {
                 ConsoleHelper.writeMessage(order.toString());
                 setChanged();
                 notifyObservers(order);
+                new AdvertisementManager(order.getTotalCookingTime() * 60).processVideos();
             } else {
                 ConsoleHelper.writeMessage("your order is empty, try again");
             }

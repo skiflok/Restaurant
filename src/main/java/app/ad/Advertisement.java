@@ -37,6 +37,16 @@ public class Advertisement {
         }
     }
 
+    /**
+     * кидает UnsupportedOperationException,
+     * если количество показов не положительное число
+     * уменьшает количество показов
+     */
+    void revalidate() {
+        if (hits<=0) throw new UnsupportedOperationException();
+        --hits;
+    }
+
     public String getName() {
         return name;
     }

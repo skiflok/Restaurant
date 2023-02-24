@@ -1,6 +1,7 @@
 package app;
 
 import app.ad.AdvertisementManager;
+import app.ad.NoVideoAvailableException;
 import app.kitchen.Order;
 
 import java.io.IOException;
@@ -33,6 +34,8 @@ public class Tablet extends Observable {
 
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Console is unavailable.", e);
+        } catch (NoVideoAvailableException e) {
+            logger.log(Level.INFO, "No video is available for the order " + order, e);
         }
     }
 

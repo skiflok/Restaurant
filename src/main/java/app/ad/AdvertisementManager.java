@@ -1,7 +1,5 @@
 package app.ad;
 
-import app.ConsoleHelper;
-
 public class AdvertisementManager {
 
     private final AdvertisementStorage storage = AdvertisementStorage.getStorage();
@@ -13,6 +11,8 @@ public class AdvertisementManager {
     }
 
     public void processVideos() {
-        ConsoleHelper.writeMessage("calling processVideos method. timeSeconds = " + timeSeconds);
+        if (storage.list().isEmpty()) {
+            throw new NoVideoAvailableException();
+        }
     }
 }

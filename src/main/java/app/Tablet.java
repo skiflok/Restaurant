@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.logging.*;
 
+/**
+ * Планшет.
+ * Создает заказы.
+ * Показывает рекламу во время ожидания заказа
+ */
 public class Tablet extends Observable {
     public Order order;
     private final int tableNumber;
@@ -17,6 +22,14 @@ public class Tablet extends Observable {
         this.tableNumber = tableNumber;
     }
 
+    /**
+     * Создает заказ (логика заполнения заказа в классе Order).
+     * Уведомляет повара через обсервер о заказе.
+     * Создает рекламного менеджера для показа рекламы.
+     * Обрабатывает исключения:
+     * ошибок ввода консоли,
+     * отсутствие видео для показа
+     */
     public void createOrder()  {
 //        logger.log(Level.INFO, "test");
         order = null;

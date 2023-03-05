@@ -11,7 +11,6 @@ import java.util.List;
  * Управляет показом рекламных роликов пользователю.
  * Подбирает ролики с целью получения максимальной выгоды от показа рекламы
  * во время приготовления конкретного заказа
- *
  */
 public class AdvertisementManager {
 
@@ -28,10 +27,6 @@ public class AdvertisementManager {
             throw new NoVideoAvailableException();
         } else {
             List<Advertisement> playlist = storage.list();
-            /*
-            Пример метода сортировки коллекций (List<T>, Comparator<? super T>) [дубликат]
-            https://stackoverflow.com/questions/14154127/collections-sortlistt-comparator-super-t-method-example
-             */
             Collections.sort(playlist, new Comparator<Advertisement>() {
                 @Override
                 public int compare(Advertisement o1, Advertisement o2) {
@@ -39,16 +34,21 @@ public class AdvertisementManager {
                     return (int) (l != 0 ? l : o2.getDuration() - o1.getDuration());
                 }
             });
-            playVideo(playlist);
+
+            for (Advertisement video : playlist) {
+                playVideo(video);
+            }
         }
     }
 
-    private void playVideo(List<Advertisement> playlist) {
-        for (Advertisement video : playlist) {
-            ConsoleHelper.writeMessage(String.format("%s is displaying... %d, %d",
-                    video.getName(),
-                    video.getAmountPerOneDisplaying(),
-                    video.getAmountPerOneDisplaying() * 1000 / video.getDuration()));
-        }
+    /**
+     * Консольная имитация показа видео
+     * @param advertisement рекламный ролик
+     */
+    private void playVideo(Advertisement advertisement) {
+        ConsoleHelper.writeMessage(String.format("%s is displaying... %d, %d",
+                advertisement.getName(),
+                advertisement.getAmountPerOneDisplaying(),
+                advertisement.getAmountPerOneDisplaying() * 1000 / advertisement.getDuration()));
     }
 }

@@ -27,12 +27,9 @@ public class AdvertisementManager {
             throw new NoVideoAvailableException();
         } else {
             List<Advertisement> playlist = storage.list();
-            Collections.sort(playlist, new Comparator<Advertisement>() {
-                @Override
-                public int compare(Advertisement o1, Advertisement o2) {
-                    long l = o2.getAmountPerOneDisplaying() - o1.getAmountPerOneDisplaying();
-                    return (int) (l != 0 ? l : o2.getDuration() - o1.getDuration());
-                }
+            Collections.sort(playlist, (o1, o2) -> {
+                long l = o2.getAmountPerOneDisplaying() - o1.getAmountPerOneDisplaying();
+                return (int) (l != 0 ? l : o2.getDuration() - o1.getDuration());
             });
 
             for (Advertisement video : playlist) {

@@ -6,6 +6,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+
+/**
+ * Управляет показом рекламных роликов пользователю.
+ * Подбирает ролики с целью получения максимальной выгоды от показа рекламы
+ * во время приготовления конкретного заказа
+ *
+ */
 public class AdvertisementManager {
 
     private final AdvertisementStorage storage = AdvertisementStorage.getStorage();
@@ -32,12 +39,16 @@ public class AdvertisementManager {
                     return (int) (l != 0 ? l : o2.getDuration() - o1.getDuration());
                 }
             });
-            for (Advertisement video : playlist) {
-                ConsoleHelper.writeMessage(String.format("%s is displaying... %d, %d",
-                        video.getName(),
-                        video.getAmountPerOneDisplaying(),
-                        video.getAmountPerOneDisplaying() * 1000 / video.getDuration()));
-            }
+            playVideo(playlist);
+        }
+    }
+
+    private void playVideo(List<Advertisement> playlist) {
+        for (Advertisement video : playlist) {
+            ConsoleHelper.writeMessage(String.format("%s is displaying... %d, %d",
+                    video.getName(),
+                    video.getAmountPerOneDisplaying(),
+                    video.getAmountPerOneDisplaying() * 1000 / video.getDuration()));
         }
     }
 }

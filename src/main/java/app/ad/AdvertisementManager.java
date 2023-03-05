@@ -3,7 +3,6 @@ package app.ad;
 import app.ConsoleHelper;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -22,6 +21,10 @@ public class AdvertisementManager {
         this.timeSeconds = timeSeconds;
     }
 
+    /**
+     * Запускает воспроизведение видео исходя из времени приготовления заказа.
+     * Выполняет сортировку по стоимости за просмотр и по продолжительности
+     */
     public void processVideos() {
         if (storage.list().isEmpty()) {
             throw new NoVideoAvailableException();
@@ -38,9 +41,14 @@ public class AdvertisementManager {
         }
     }
 
+
+
     /**
      * Консольная имитация показа видео
-     * @param advertisement рекламный ролик
+     * 1 - название ролика,
+     * 2- стоимость показа одного рекламного ролика в копейках,
+     * 3 - стоимость показа одной секунды рекламного ролика в тысячных частях копейки.
+     * @param advertisement Рекламный ролик для воспроизведения.
      */
     private void playVideo(Advertisement advertisement) {
         ConsoleHelper.writeMessage(String.format("%s is displaying... %d, %d",

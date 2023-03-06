@@ -32,6 +32,13 @@ public class AdvertisementManager {
     * если время одинаковое то выбрать минимальное количество роликов
     * */
 
+    private long masAmount; // максимальная стоимость роликов
+
+    private List<Advertisement> optimalPlaylist;
+
+    private void createOptimalPlayList () {
+
+    }
 
 
     /**
@@ -50,6 +57,7 @@ public class AdvertisementManager {
 
             for (Advertisement video : playlist) {
                 playVideo(video);
+                video.revalidate();
             }
         }
     }

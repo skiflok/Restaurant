@@ -47,6 +47,10 @@ public class Advertisement {
         --hits;
     }
 
+    public boolean isAlive() {
+        return hits > 0;
+    }
+
     public String getName() {
         return name;
     }

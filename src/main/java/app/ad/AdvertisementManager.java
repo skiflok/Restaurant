@@ -2,6 +2,7 @@ package app.ad;
 
 import app.ConsoleHelper;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,6 +39,19 @@ public class AdvertisementManager {
 
     private void createOptimalPlayList () {
 
+    }
+
+
+    /**
+     * получить видео с положительным количеством оплаченных показов
+     * @return список видео в доступных для показа
+     */
+    private ArrayList<Advertisement> getActualAdvertisements () {
+        ArrayList<Advertisement> actualAdvertisements = new ArrayList<>();
+        for (Advertisement video : storage.list()) {
+         if (video.isAlive()) actualAdvertisements.add(video);
+        }
+        return actualAdvertisements;
     }
 
 

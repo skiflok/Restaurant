@@ -112,9 +112,10 @@ public class AdvertisementManager {
      * @param advertisement Рекламный ролик для воспроизведения.
      */
     private void playVideo(Advertisement advertisement) {
-        ConsoleHelper.writeMessage(String.format("%s is displaying... %d, %d",
+        ConsoleHelper.writeMessage(String.format("%15s is displaying...  \u00A2/unit - %3d, \u00A2/sec - %3.3f, duration - %d s",
                 advertisement.getName(),
                 advertisement.getAmountPerOneDisplaying(),
-                advertisement.getAmountPerOneDisplaying() * 1000 / advertisement.getDuration()));
+                advertisement.getAmountPerOneDisplaying() / (double) advertisement.getDuration(),
+                advertisement.getDuration()));
     }
 }

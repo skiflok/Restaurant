@@ -5,7 +5,7 @@ import app.ad.Advertisement;
 import java.util.Date;
 import java.util.List;
 
-public class NoAvailableVideoEventDataRow {
+public class NoAvailableVideoEventDataRow implements EventDataRow{
     List<Advertisement> optimalPlaylist;
     long amount;
     int totalDuration;
@@ -19,5 +19,10 @@ public class NoAvailableVideoEventDataRow {
         this.amount = amount;
         this.totalDuration = totalDuration;
         this.currentDate = new Date();
+    }
+
+    @Override
+    public EventType getType() {
+        return EventType.NO_AVAILABLE_VIDEO;
     }
 }

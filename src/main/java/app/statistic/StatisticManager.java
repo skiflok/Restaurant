@@ -28,14 +28,13 @@ public class StatisticManager {
 
     void register(EventDataRow data) {
         //TODO
+        statisticStorage.put(data);
     }
 
 
     private class StatisticStorage {
 
         private Map<EventType, List<EventDataRow>> storage = new HashMap<>();
-
-
         /**
          * Инициализирует хранилище с типами событий и пустым листом
          */
@@ -44,6 +43,13 @@ public class StatisticManager {
                 storage.put(type, new ArrayList<EventDataRow>());
             }
         }
+
+        private void put(EventDataRow data) {
+            storage.get(data.getType()).add(data);
+        }
+
     }
+
+
 
 }

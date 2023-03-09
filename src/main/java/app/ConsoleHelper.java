@@ -38,8 +38,6 @@ public class ConsoleHelper {
             }
             guestOrder = readString().trim();
         }
-        writeMessage("thank you for your order");
-        writeMessage("your order: " + dishes);
         return dishes;
     }
 

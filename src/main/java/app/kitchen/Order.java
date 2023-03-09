@@ -15,16 +15,32 @@ public class Order {
         this.dishes = ConsoleHelper.getAllDishesForOrder();
     }
 
+    public boolean isEmpty() {
+        return dishes.isEmpty();
+    }
+
+    public int getTotalCookingTime() {
+        int cookingTime = 0;
+        for (Dish dish: dishes) {
+            cookingTime += dish.getDuration();
+        }
+        return cookingTime;
+    }
+
+    public Tablet getTablet() {
+        return tablet;
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
+    }
+
     @Override
     public String toString() {
         if (dishes.isEmpty()) {
-            return "";
+            return null;
         } else {
             return "Your order: " + dishes + " of Tablet" + tablet;
-//            return "Order{" +
-//                    "tablet=" + tablet +
-//                    ", dishes=" + dishes +
-//                    '}';
         }
     }
 }

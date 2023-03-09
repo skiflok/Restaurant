@@ -3,6 +3,7 @@ package app.statistic;
 
 import app.statistic.event.EventDataRow;
 import app.statistic.event.EventType;
+import app.statistic.event.VideoSelectedEventDataRow;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +29,15 @@ public class StatisticManager {
 
     public void register(EventDataRow data) {
         statisticStorage.put(data);
+    }
+
+    public long AdvertisementProfit() {
+        long profit = 0;
+        List<EventDataRow> eventDataRows = statisticStorage.storage.get(EventType.SELECTED_VIDEOS);
+        for (EventDataRow row : eventDataRows) {
+            profit +=((VideoSelectedEventDataRow) row).getAmount();
+        }
+        return profit;
     }
 
 

@@ -1,6 +1,8 @@
 package app.kitchen;
 
 import app.ConsoleHelper;
+import app.statistic.StatisticManager;
+import app.statistic.event.CookedOrderEventDataRow;
 
 
 import java.util.Observable;
@@ -27,6 +29,12 @@ public class Cook extends Observable implements Observer {
 //        if (!((Order) order).isEmpty()) {
         ConsoleHelper.writeMessage("Start cooking - " + order
                 + ", cooking time " + ((Order) order).getTotalCookingTime() + " min");
+        StatisticManager.getInstance().register(
+                new CookedOrderEventDataRow(
+                        ((Order) order).getTablet().toString(),
+                        name,
+                        ((Order) order).getTotalCookingTime(),
+                        ((Order) order).getDishes()));
         setChanged();
         notifyObservers(order);
 //        }

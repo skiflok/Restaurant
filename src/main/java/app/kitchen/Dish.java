@@ -5,7 +5,8 @@ public enum Dish {
     STEAK(30),
     SOUP(15),
     JUICE(5),
-    WATER(3);
+    WATER(3),
+    NOT_HUNGRY(1);
 
     private int duration;
 

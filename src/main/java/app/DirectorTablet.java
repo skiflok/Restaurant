@@ -2,6 +2,9 @@ package app;
 
 import app.statistic.StatisticManager;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 public class DirectorTablet {
 
 
@@ -9,7 +12,11 @@ public class DirectorTablet {
      * сумма заработанная на рекламе, сгруппировать по дням
      */
     public void printAdvertisementProfit() {
-        ConsoleHelper.writeMessage(((Long) StatisticManager.getInstance().AdvertisementProfit()).toString());
+        TreeMap<String, Long> profitMap = new TreeMap<>(StatisticManager.getInstance().getAdvertisementProfit());
+        for (Map.Entry <String, Long> dateProfit: profitMap.entrySet()) {
+            ConsoleHelper.writeMessage(String.format("date - %s, AdvertisementProfit - %5.2f$",
+                    dateProfit.getKey(), dateProfit.getValue()/100.0));
+        }
     }
 
     /**

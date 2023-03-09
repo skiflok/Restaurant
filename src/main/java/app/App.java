@@ -5,12 +5,11 @@ import app.kitchen.Cook;
 import app.kitchen.Waiter;
 
 import java.io.*;
-import java.util.logging.Logger;
 
 public class App {
 
     //    private final static Logger logger = Logger.getLogger(Tablet.class.getName());
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
 
         InputStream sysInBackup = System.in;
@@ -32,6 +31,12 @@ public class App {
             is.reset();
         }
         System.setIn(sysInBackup);
+
+        DirectorTablet directorTablet = new DirectorTablet();
+        directorTablet.printAdvertisementProfit();
+        directorTablet.printCookWorkLoading();
+        directorTablet.printActiveVideoSet();
+        directorTablet.printArchivedVideoSet();
 
     }
 }

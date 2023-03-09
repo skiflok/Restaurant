@@ -32,6 +32,8 @@ public class App {
         }
         System.setIn(sysInBackup);
 
+        ConsoleHelper.writeMessage("\n");
+
         DirectorTablet directorTablet = new DirectorTablet();
         directorTablet.printAdvertisementProfit();
         directorTablet.printCookWorkLoading();

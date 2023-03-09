@@ -27,6 +27,14 @@ public class Order {
         return cookingTime;
     }
 
+    public Tablet getTablet() {
+        return tablet;
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
+    }
+
     @Override
     public String toString() {
         if (dishes.isEmpty()) {

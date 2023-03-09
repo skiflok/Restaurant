@@ -5,6 +5,11 @@ import app.kitchen.Dish;
 import java.util.Date;
 import java.util.List;
 
+
+/**
+ *  Создает объект для сбора статистики по заказу.
+ *  Номер столика, имя повара, время приготовления, список блюд
+ */
 public class CookedOrderEventDataRow implements EventDataRow{
     String tabletName;
     String cookName;
@@ -24,6 +29,10 @@ public class CookedOrderEventDataRow implements EventDataRow{
         this.currentDate = new Date();
     }
 
+    /**
+     * возвращает тип события
+     * @return возвращает тип события (приготовление заказа)
+     */
     @Override
     public EventType getType() {
         return EventType.COOKED_ORDER;

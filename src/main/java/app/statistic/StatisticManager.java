@@ -5,10 +5,8 @@ import app.statistic.event.EventDataRow;
 import app.statistic.event.EventType;
 import app.statistic.event.VideoSelectedEventDataRow;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Управляет регистрацией событий и сбором статистики.
@@ -31,13 +29,26 @@ public class StatisticManager {
         statisticStorage.put(data);
     }
 
-    public long AdvertisementProfit() {
-        long profit = 0;
+
+    /**
+     * Формирует мап {дата - суммарный доход от просмотра видео в этот день}.
+     * @return мап {дата - суммарный доход от просмотра видео в этот день}
+     */
+    public Map<String, Long> getAdvertisementProfit() {
+        Map<String, Long> profitMap = new HashMap<>();
         List<EventDataRow> eventDataRows = statisticStorage.storage.get(EventType.SELECTED_VIDEOS);
+
         for (EventDataRow row : eventDataRows) {
-            profit +=((VideoSelectedEventDataRow) row).getAmount();
+            VideoSelectedEventDataRow event = ((VideoSelectedEventDataRow) row);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+            String date = dateFormat.format(event.getCurrentDate());
+            if (!profitMap.containsKey(date)) {
+                profitMap.put(date, event.getAmount());
+            } else {
+                profitMap.put(date, profitMap.get(date) + event.getAmount());
+            }
         }
-        return profit;
+        return profitMap;
     }
 
 

@@ -16,7 +16,7 @@ import java.util.Map;
 public class StatisticManager {
 
     private static final StatisticManager instance = new StatisticManager();
-    private StatisticStorage statisticStorage = new StatisticStorage();
+    private final StatisticStorage statisticStorage = new StatisticStorage();
 
 
     private StatisticManager() {
@@ -26,21 +26,20 @@ public class StatisticManager {
         return instance;
     }
 
-    void register(EventDataRow data) {
-        //TODO
+    public void register(EventDataRow data) {
         statisticStorage.put(data);
     }
 
 
-    private class StatisticStorage {
+    private static class StatisticStorage {
 
-        private Map<EventType, List<EventDataRow>> storage = new HashMap<>();
+        private final Map<EventType, List<EventDataRow>> storage = new HashMap<>();
         /**
          * Инициализирует хранилище с типами событий и пустым листом
          */
         public StatisticStorage() {
             for (EventType type : EventType.values()) {
-                storage.put(type, new ArrayList<EventDataRow>());
+                storage.put(type, new ArrayList<>());
             }
         }
 

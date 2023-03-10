@@ -37,4 +37,24 @@ public class CookedOrderEventDataRow implements EventDataRow{
     public EventType getType() {
         return EventType.COOKED_ORDER;
     }
+
+    public String getTabletName() {
+        return tabletName;
+    }
+
+    public String getCookName() {
+        return cookName;
+    }
+
+    public int getCookingTimeSeconds() {
+        return cookingTimeSeconds;
+    }
+
+    public List<Dish> getCookingDishes() {
+        return cookingDishes;
+    }
+
+    public Date getCurrentDate() {
+        return currentDate;
+    }
 }

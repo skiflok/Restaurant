@@ -1,11 +1,16 @@
 package app;
 
+import app.ad.Advertisement;
+import app.ad.AdvertisementStorage;
 import app.statistic.StatisticManager;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class DirectorTablet {
+
+    AdvertisementStorage storage = AdvertisementStorage.getStorage();
 
 
     /**
@@ -40,14 +45,20 @@ public class DirectorTablet {
      * список активных роликов и оставшееся количество показов по каждому
      */
     public void printActiveVideoSet() {
-        //TODO
+        ConsoleHelper.writeMessage("ActiveVideoSet\n");
+        for (Advertisement video : storage.list()) {
+            if (video.isAlive()) ConsoleHelper.writeMessage(video.getName() + "hits - "+ video.getHits());
+        }
     }
 
     /**
      * список НЕ активных роликов (с оставшемся количеством показов равным нулю)
      */
     public void printArchivedVideoSet() {
-        //TODO
+        ConsoleHelper.writeMessage("\nArchivedVideoSet\n");
+        for (Advertisement video : storage.list()) {
+            if (!video.isAlive()) ConsoleHelper.writeMessage(video.getName() + "hits - "+ video.getHits());
+        }
     }
 
 }

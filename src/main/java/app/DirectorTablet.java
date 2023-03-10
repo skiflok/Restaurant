@@ -13,17 +13,26 @@ public class DirectorTablet {
      */
     public void printAdvertisementProfit() {
         TreeMap<String, Long> profitMap = new TreeMap<>(StatisticManager.getInstance().getAdvertisementProfit());
-        for (Map.Entry <String, Long> dateProfit: profitMap.entrySet()) {
+        for (Map.Entry<String, Long> dateProfit : profitMap.entrySet()) {
             ConsoleHelper.writeMessage(String.format("date - %s, AdvertisementProfit - %5.2f$",
-                    dateProfit.getKey(), dateProfit.getValue()/100.0));
+                    dateProfit.getKey(), dateProfit.getValue() / 100.0));
         }
+        ConsoleHelper.writeMessage("");
     }
 
     /**
      * загрузка (рабочее время) повара, сгруппировать по дням
      */
     public void printCookWorkLoading() {
-        //TODO
+        TreeMap<String, Map<String, Integer>> cookWork = new TreeMap<>(StatisticManager.getInstance().getCookWorkLoading());
+        for (Map.Entry<String, Map<String, Integer>> dateWork : cookWork.entrySet()) {
+            ConsoleHelper.writeMessage(String.format("date - %s", dateWork.getKey()));
+            for (Map.Entry<String, Integer> cook : dateWork.getValue().entrySet()) {
+                ConsoleHelper.writeMessage(String.format("name - %10s, workTime - %5d min",
+                        cook.getKey(), cook.getValue()));
+            }
+        }
+        ConsoleHelper.writeMessage("");
     }
 
 

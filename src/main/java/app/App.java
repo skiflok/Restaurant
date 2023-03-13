@@ -7,6 +7,7 @@ import app.kitchen.Waiter;
 import java.io.*;
 
 public class App {
+    private static int ORDER_CREATING_INTERVAL = 100;
 
     //    private final static Logger logger = Logger.getLogger(Tablet.class.getName());
     public static void main(String[] args) {

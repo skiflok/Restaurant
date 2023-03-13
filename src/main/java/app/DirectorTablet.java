@@ -2,7 +2,7 @@ package app;
 
 import app.ad.Advertisement;
 import app.ad.AdvertisementStorage;
-import app.statistic.StatisticManager;
+import app.statistic.StatisticEventManager;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -17,7 +17,7 @@ public class DirectorTablet {
      */
     public void printAdvertisementProfit() {
         long total = 0;
-        TreeMap<String, Long> profitMap = new TreeMap<>(StatisticManager.getInstance().getAdvertisementProfit());
+        TreeMap<String, Long> profitMap = new TreeMap<>(StatisticEventManager.getInstance().getAdvertisementProfit());
         for (Map.Entry<String, Long> dateProfit : profitMap.entrySet()) {
             ConsoleHelper.writeMessage(String.format("date - %s, AdvertisementProfit - %5.2f$",
                     dateProfit.getKey(), dateProfit.getValue() / 100.0));
@@ -30,7 +30,7 @@ public class DirectorTablet {
      * загрузка (рабочее время) повара, сгруппировать по дням
      */
     public void printCookWorkLoading() {
-        TreeMap<String, Map<String, Integer>> cookWork = new TreeMap<>(StatisticManager.getInstance().getCookWorkLoading());
+        TreeMap<String, Map<String, Integer>> cookWork = new TreeMap<>(StatisticEventManager.getInstance().getCookWorkLoading());
         for (Map.Entry<String, Map<String, Integer>> dateWork : cookWork.entrySet()) {
             ConsoleHelper.writeMessage(String.format("date - %s", dateWork.getKey()));
             for (Map.Entry<String, Integer> cook : dateWork.getValue().entrySet()) {

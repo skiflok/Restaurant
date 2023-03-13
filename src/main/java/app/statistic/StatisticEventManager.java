@@ -13,16 +13,16 @@ import java.util.*;
  * Управляет регистрацией событий и сбором статистики.
  * Имеет хранилище в виде внутреннего класса.
  */
-public class StatisticManager {
+public class StatisticEventManager {
 
-    private static final StatisticManager instance = new StatisticManager();
+    private static final StatisticEventManager instance = new StatisticEventManager();
     private final StatisticStorage statisticStorage = new StatisticStorage();
 
 
-    private StatisticManager() {
+    private StatisticEventManager() {
     }
 
-    public static StatisticManager getInstance() {
+    public static StatisticEventManager getInstance() {
         return instance;
     }
 

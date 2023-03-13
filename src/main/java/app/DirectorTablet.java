@@ -4,7 +4,6 @@ import app.ad.Advertisement;
 import app.ad.AdvertisementStorage;
 import app.statistic.StatisticManager;
 
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -17,12 +16,14 @@ public class DirectorTablet {
      * сумма заработанная на рекламе, сгруппировать по дням
      */
     public void printAdvertisementProfit() {
+        long total = 0;
         TreeMap<String, Long> profitMap = new TreeMap<>(StatisticManager.getInstance().getAdvertisementProfit());
         for (Map.Entry<String, Long> dateProfit : profitMap.entrySet()) {
             ConsoleHelper.writeMessage(String.format("date - %s, AdvertisementProfit - %5.2f$",
                     dateProfit.getKey(), dateProfit.getValue() / 100.0));
+            total += dateProfit.getValue();
         }
-        ConsoleHelper.writeMessage("");
+        ConsoleHelper.writeMessage(String.format("Total - %5.2f$\n", total/100.0));
     }
 
     /**

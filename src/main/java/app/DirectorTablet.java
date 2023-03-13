@@ -1,16 +1,14 @@
 package app;
 
 import app.ad.Advertisement;
-import app.ad.AdvertisementStorage;
+import app.ad.StatisticAdvertisementManager;
 import app.statistic.StatisticEventManager;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class DirectorTablet {
-
-    AdvertisementStorage storage = AdvertisementStorage.getStorage();
-
 
     /**
      * сумма заработанная на рекламе, сгруппировать по дням
@@ -46,8 +44,9 @@ public class DirectorTablet {
      * список активных роликов и оставшееся количество показов по каждому
      */
     public void printActiveVideoSet() {
+        List<Advertisement> activeVideo = StatisticAdvertisementManager.getInstance().getVideoSet(true);
         ConsoleHelper.writeMessage("ActiveVideoSet\n");
-        for (Advertisement video : storage.list()) {
+        for (Advertisement video : activeVideo) {
             if (video.isAlive()) ConsoleHelper.writeMessage(video.getName() + "hits - "+ video.getHits());
         }
     }
@@ -56,8 +55,9 @@ public class DirectorTablet {
      * список НЕ активных роликов (с оставшемся количеством показов равным нулю)
      */
     public void printArchivedVideoSet() {
+        List<Advertisement> archiveVideo = StatisticAdvertisementManager.getInstance().getVideoSet(false);
         ConsoleHelper.writeMessage("\nArchivedVideoSet\n");
-        for (Advertisement video : storage.list()) {
+        for (Advertisement video : archiveVideo) {
             if (!video.isAlive()) ConsoleHelper.writeMessage(video.getName() + "hits - "+ video.getHits());
         }
     }

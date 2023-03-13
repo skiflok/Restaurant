@@ -4,9 +4,7 @@ import app.ad.Advertisement;
 import app.ad.StatisticAdvertisementManager;
 import app.statistic.StatisticEventManager;
 
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class DirectorTablet {
 
@@ -44,9 +42,10 @@ public class DirectorTablet {
      * список активных роликов и оставшееся количество показов по каждому
      */
     public void printActiveVideoSet() {
-        List<Advertisement> activeVideo = StatisticAdvertisementManager.getInstance().getVideoSet(true);
+        List<Advertisement> videoSet = StatisticAdvertisementManager.getInstance().getVideoSet(true);
+        videoSet.sort(Comparator.comparing(o -> o.getName().toLowerCase()));
         ConsoleHelper.writeMessage("ActiveVideoSet\n");
-        for (Advertisement video : activeVideo) {
+        for (Advertisement video : videoSet) {
             if (video.isAlive()) ConsoleHelper.writeMessage(video.getName() + "hits - "+ video.getHits());
         }
     }
@@ -55,9 +54,10 @@ public class DirectorTablet {
      * список НЕ активных роликов (с оставшемся количеством показов равным нулю)
      */
     public void printArchivedVideoSet() {
-        List<Advertisement> archiveVideo = StatisticAdvertisementManager.getInstance().getVideoSet(false);
+        List<Advertisement> videoSet = StatisticAdvertisementManager.getInstance().getVideoSet(false);
+        videoSet.sort(Comparator.comparing(o -> o.getName().toLowerCase()));
         ConsoleHelper.writeMessage("\nArchivedVideoSet\n");
-        for (Advertisement video : archiveVideo) {
+        for (Advertisement video : videoSet) {
             if (!video.isAlive()) ConsoleHelper.writeMessage(video.getName() + "hits - "+ video.getHits());
         }
     }

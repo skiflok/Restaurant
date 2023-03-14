@@ -16,6 +16,16 @@ public class App {
 
         ConsoleHelper.writeMessage("it's a restaurant Restaurant");
 
+        Waiter waiter = new Waiter();
+
+        List<Cook> cooks = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            Cook cook = new Cook("Cook_" + i);
+            StatisticEventManager.getInstance().register(cook);
+            cook.addObserver(waiter);
+            cooks.add(cook);
+        }
+
         Cook cook = new Cook("Cook_1");
         Cook cook2 = new Cook("Cook_2");
         StatisticEventManager.getInstance().register(cook);
@@ -27,10 +37,6 @@ public class App {
             tablets.get(i).addObserver(cook);
             tablets.get(i).addObserver(cook2);
         }
-
-        Waiter waiter = new Waiter();
-        cook.addObserver(waiter);
-        cook2.addObserver(waiter);
 
         Thread thread = new Thread(new RandomOrderGeneratorTask(tablets, ORDER_CREATING_INTERVAL));
 

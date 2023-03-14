@@ -26,16 +26,21 @@ public class App {
             tablets.add(new Tablet(i));
             tablets.get(i).addObserver(cook);
             tablets.get(i).addObserver(cook2);
-
         }
 
         Waiter waiter = new Waiter();
         cook.addObserver(waiter);
         cook2.addObserver(waiter);
 
-        tablets.get(0).createTestOrder();
+        Thread thread = new Thread(new RandomOrderGeneratorTask(tablets, ORDER_CREATING_INTERVAL));
 
-        tablets.get(1).createTestOrder();
+        try {
+            thread.start();
+            Thread.sleep(1000);
+            thread.interrupt();
+        } catch (Exception ignored) {
+
+        }
 
         ConsoleHelper.writeMessage("\n");
 

@@ -26,16 +26,13 @@ public class App {
             cooks.add(cook);
         }
 
-        Cook cook = new Cook("Cook_1");
-        Cook cook2 = new Cook("Cook_2");
-        StatisticEventManager.getInstance().register(cook);
-        StatisticEventManager.getInstance().register(cook);
-
         List<Tablet> tablets = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            tablets.add(new Tablet(i));
-            tablets.get(i).addObserver(cook);
-            tablets.get(i).addObserver(cook2);
+            Tablet tablet = new Tablet(i);
+            tablets.add(tablet);
+            for (Cook cook_ : cooks) {
+                tablet.addObserver(cook_);
+            }
         }
 
         Thread thread = new Thread(new RandomOrderGeneratorTask(tablets, ORDER_CREATING_INTERVAL));

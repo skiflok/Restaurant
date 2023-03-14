@@ -1,6 +1,7 @@
 package app.statistic;
 
 
+import app.kitchen.Cook;
 import app.statistic.event.CookedOrderEventDataRow;
 import app.statistic.event.EventDataRow;
 import app.statistic.event.EventType;
@@ -18,8 +19,18 @@ public class StatisticEventManager {
     private static final StatisticEventManager instance = new StatisticEventManager();
     private final StatisticStorage statisticStorage = new StatisticStorage();
 
+    private Set<Cook> cooks = new HashSet<>();
+
 
     private StatisticEventManager() {
+    }
+
+    public Set<Cook> getCooks() {
+        return cooks;
+    }
+
+    public void register(Cook cook) {
+        this.cooks.add(cook);
     }
 
     public static StatisticEventManager getInstance() {

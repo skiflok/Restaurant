@@ -15,6 +15,7 @@ public class TestOrder extends Order{
         super(tablet);
     }
 
+    @Override
     protected void initDishes() {
         this.dishes = new ArrayList<>();
         Dish[] dish = Dish.values();

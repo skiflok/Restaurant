@@ -19,6 +19,8 @@ public class AdvertisementStorage {
         add(new Advertisement(someContent, "Third Video", 400, 2, 10 * 60)); //10 min / 2.00$
         add(new Advertisement(someContent, "Fourth Video", 400, 20, 5 * 60)); //5 min / 0.20$
         add(new Advertisement(someContent, "Fifth Video", 1000, 20, 2 * 60)); //2 min / 0.50$
+        add(new Advertisement(someContent, "6 Video", 10000, 10, 30 * 60)); //30 min / 10.00$
+        add(new Advertisement(someContent, "7 Video", 5000, 10, 45 * 60)); //45 min / 5.00$
     }
 
 

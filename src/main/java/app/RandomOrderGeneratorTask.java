@@ -20,7 +20,7 @@ public class RandomOrderGeneratorTask implements Runnable {
             while (true) {
              int tablet = (int) (Math.random() * tablets.size());
              Tablet tableGeneratesAnOrder = tablets.get(tablet);
-             tableGeneratesAnOrder.createOrder();
+             tableGeneratesAnOrder.createTestOrder();
              Thread.sleep(interval);
             }
         } catch (InterruptedException ignored) {

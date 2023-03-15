@@ -2,6 +2,7 @@ package app;
 
 
 import app.kitchen.Cook;
+import app.kitchen.OrderManager;
 import app.kitchen.Waiter;
 import app.statistic.StatisticEventManager;
 
@@ -17,6 +18,7 @@ public class App {
         ConsoleHelper.writeMessage("it's a restaurant Restaurant");
 
         Waiter waiter = new Waiter();
+        OrderManager orderManager = new OrderManager();
 
         List<Cook> cooks = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -30,9 +32,7 @@ public class App {
         for (int i = 0; i < 5; i++) {
             Tablet tablet = new Tablet(i);
             tablets.add(tablet);
-            for (Cook cook_ : cooks) {
-                tablet.addObserver(cook_);
-            }
+            tablet.addObserver(orderManager);
         }
 
         Thread thread = new Thread(new RandomOrderGeneratorTask(tablets, ORDER_CREATING_INTERVAL));

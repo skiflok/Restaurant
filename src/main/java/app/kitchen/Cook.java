@@ -6,9 +6,13 @@ import app.statistic.event.CookedOrderEventDataRow;
 
 
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Cook extends Observable {
+
+    private final static Logger logger = Logger.getLogger(OrderManager.class.getName());
 
     String name;
 
@@ -30,7 +34,12 @@ public class Cook extends Observable {
     }
 
     void startCookingOrder(Order order) {
+
+        logger.log(Level.INFO, "startCookingOrder");
+
         busy = true;
+
+
         ConsoleHelper.writeMessage("Start cooking - " + order
                 + ", cooking time " +  order.getTotalCookingTime() + " min");
         StatisticEventManager.getInstance().register(
@@ -48,5 +57,7 @@ public class Cook extends Observable {
         setChanged();
         notifyObservers(order);
         busy = false;
+
+        logger.log(Level.INFO, "stop CookingOrder");
     }
 }

@@ -32,6 +32,7 @@ public class OrderManager implements Observer {
                     for (Cook cook : cooks) {
                         if (!cook.isBusy() && !orders.isEmpty()) {
                             cook.startCookingOrder(orders.take());
+                            break;
                         }
                     }
                     Thread.sleep(10);

@@ -22,25 +22,21 @@ public class OrderManager implements Observer {
 
     public OrderManager() {
         logger.log(Level.INFO, getClass().getName());
-        Thread passOrderToCook = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                logger.log(Level.INFO, "Запущен passOrderToCook");
+        Thread passOrderToCook = new Thread(() -> {
+            logger.log(Level.INFO, "Запущен passOrderToCook");
 
-                Set<Cook> cooks = StatisticEventManager.getInstance().getCooks();
+            Set<Cook> cooks = StatisticEventManager.getInstance().getCooks();
 
-                while (true) {
-                    try {
-//                        logger.log(Level.INFO, "Цикл passOrderToCook");
-                        for (Cook cook : cooks) {
-                            if (!cook.isBusy() && !orders.isEmpty()) {
-                                cook.startCookingOrder(orders.take());
-                            }
+            while (true) {
+                try {
+                    for (Cook cook : cooks) {
+                        if (!cook.isBusy() && !orders.isEmpty()) {
+                            cook.startCookingOrder(orders.take());
                         }
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        logger.log(Level.SEVERE, "InterruptedException");
                     }
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    logger.log(Level.SEVERE, "InterruptedException");
                 }
             }
         });

@@ -6,11 +6,13 @@ import app.statistic.event.CookedOrderEventDataRow;
 
 
 import java.util.Observable;
-import java.util.Observer;
 
-public class Cook extends Observable implements Observer {
+
+public class Cook extends Observable {
 
     String name;
+
+    boolean isBusy;
 
     public Cook(String name) {
         this.name = name;
@@ -23,21 +25,28 @@ public class Cook extends Observable implements Observer {
                 '}';
     }
 
-
-    @Override
-    public void update(Observable o, Object order) {
-//        if (!((Order) order).isEmpty()) {
-        ConsoleHelper.writeMessage("Start cooking - " + order
-                + ", cooking time " + ((Order) order).getTotalCookingTime() + " min");
-        StatisticEventManager.getInstance().register(
-                new CookedOrderEventDataRow(
-                        ((Order) order).getTablet().toString(),
-                        name,
-                        ((Order) order).getTotalCookingTime(),
-                        ((Order) order).getDishes()));
-        setChanged();
-        notifyObservers(order);
-//        }
+    public boolean isBusy() {
+        return isBusy;
     }
 
+    void startCookingOrder(Order order) {
+        isBusy = true;
+        ConsoleHelper.writeMessage("Start cooking - " + order
+                + ", cooking time " +  order.getTotalCookingTime() + " min");
+        StatisticEventManager.getInstance().register(
+                new CookedOrderEventDataRow(
+                        order.getTablet().toString(),
+                        name,
+                        order.getTotalCookingTime(),
+                        order.getDishes()));
+
+        try {
+            Thread.sleep(order.getTotalCookingTime() / 60 * 10);
+        } catch (InterruptedException ignored) {
+
+        }
+        setChanged();
+        notifyObservers(order);
+        isBusy = false;
+    }
 }

@@ -12,7 +12,7 @@ public class Cook extends Observable {
 
     String name;
 
-    boolean isBusy;
+    private boolean busy;
 
     public Cook(String name) {
         this.name = name;
@@ -26,11 +26,11 @@ public class Cook extends Observable {
     }
 
     public boolean isBusy() {
-        return isBusy;
+        return busy;
     }
 
     void startCookingOrder(Order order) {
-        isBusy = true;
+        busy = true;
         ConsoleHelper.writeMessage("Start cooking - " + order
                 + ", cooking time " +  order.getTotalCookingTime() + " min");
         StatisticEventManager.getInstance().register(
@@ -47,6 +47,6 @@ public class Cook extends Observable {
         }
         setChanged();
         notifyObservers(order);
-        isBusy = false;
+        busy = false;
     }
 }

@@ -6,17 +6,24 @@ import app.statistic.event.CookedOrderEventDataRow;
 
 
 import java.util.Observable;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class Cook extends Observable {
+public class Cook extends Observable implements Runnable {
 
-    private final static Logger logger = Logger.getLogger(OrderManager.class.getName());
+    private final static Logger logger = Logger.getLogger(Cook.class.getName());
 
     String name;
 
     private boolean busy;
+
+    private LinkedBlockingQueue<Order> orders;
+
+    public void setOrders(LinkedBlockingQueue<Order> orders) {
+        this.orders = orders;
+    }
 
     public Cook(String name) {
         this.name = name;
@@ -35,13 +42,12 @@ public class Cook extends Observable {
 
     void startCookingOrder(Order order) {
 
-        logger.log(Level.INFO, "startCookingOrder");
+        logger.log(Level.INFO, "startCookingOrder" + this.name);
 
         busy = true;
 
-
         ConsoleHelper.writeMessage("Start cooking - " + order
-                + ", cooking time " +  order.getTotalCookingTime() + " min");
+                + ", cooking time " + order.getTotalCookingTime() + " min");
         StatisticEventManager.getInstance().register(
                 new CookedOrderEventDataRow(
                         order.getTablet().toString(),
@@ -58,6 +64,22 @@ public class Cook extends Observable {
         notifyObservers(order);
         busy = false;
 
-        logger.log(Level.INFO, "stop CookingOrder");
+        logger.log(Level.INFO, "stop CookingOrder" + this.name);
+    }
+
+    @Override
+    public void run() {
+        logger.log(Level.INFO, "Запущен cookTread" + this.name);
+        try {
+            while (true) {
+
+                if (!orders.isEmpty() && !this.isBusy()) {
+                    this.startCookingOrder(orders.take());
+                }
+                Thread.sleep(10);
+            }
+        } catch (InterruptedException e) {
+            logger.log(Level.SEVERE, "InterruptedException");
+        }
     }
 }

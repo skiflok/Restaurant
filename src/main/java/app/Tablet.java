@@ -6,7 +6,7 @@ import app.kitchen.Order;
 import app.kitchen.TestOrder;
 
 import java.io.IOException;
-import java.util.Observable;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.*;
 
 /**
@@ -14,10 +14,16 @@ import java.util.logging.*;
  * Создает заказы.
  * Показывает рекламу во время ожидания заказа
  */
-public class Tablet extends Observable {
+public class Tablet {
     public Order order;
     private final int tableNumber;
     private final static Logger logger = Logger.getLogger(Tablet.class.getName());
+
+    private LinkedBlockingQueue<Order> orders;
+
+    public void setOrders(LinkedBlockingQueue<Order> orders) {
+        this.orders = orders;
+    }
 
     public Tablet(int tableNumber) {
         this.tableNumber = tableNumber;
@@ -62,8 +68,9 @@ public class Tablet extends Observable {
         if (!order.isEmpty()) {
             ConsoleHelper.writeMessage("thank you for your order");
             ConsoleHelper.writeMessage(order.toString());
-            setChanged();
-            notifyObservers(order);
+
+            orders.offer(order);
+
             new AdvertisementManager(order.getTotalCookingTime() * 60).processVideos();
         } else {
             ConsoleHelper.writeMessage("your order is empty, try again");

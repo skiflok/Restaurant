@@ -1,7 +1,7 @@
 package app.ad;
 
 import app.ConsoleHelper;
-import app.statistic.StatisticManager;
+import app.statistic.StatisticEventManager;
 import app.statistic.event.NoAvailableVideoEventDataRow;
 import app.statistic.event.VideoSelectedEventDataRow;
 
@@ -92,7 +92,7 @@ public class AdvertisementManager {
     public void processVideos() {
         createOptimalPlayList(new ArrayList<>(), timeSeconds, 0L);
         if (optimalPlaylist == null || optimalPlaylist.isEmpty()) {
-            StatisticManager.getInstance().register(new NoAvailableVideoEventDataRow(timeSeconds));
+            StatisticEventManager.getInstance().register(new NoAvailableVideoEventDataRow(timeSeconds));
             throw new NoVideoAvailableException();
         } else {
             Collections.sort(optimalPlaylist, (o1, o2) -> {
@@ -100,7 +100,7 @@ public class AdvertisementManager {
                 return (int) (l != 0 ? l : o2.getDuration() - o1.getDuration());
             });
 
-            StatisticManager.getInstance().register(new VideoSelectedEventDataRow(
+            StatisticEventManager.getInstance().register(new VideoSelectedEventDataRow(
                     optimalPlaylist, maxAmount, (int) (timeSeconds - availableTimeToShow)));
 
             for (Advertisement video : optimalPlaylist) {
@@ -119,10 +119,10 @@ public class AdvertisementManager {
      * @param advertisement Рекламный ролик для воспроизведения.
      */
     private void playVideo(Advertisement advertisement) {
-        ConsoleHelper.writeMessage(String.format("%15s is displaying...  \u00A2/unit - %3d, \u00A2/sec - %3.3f, duration - %d s",
+        ConsoleHelper.writeMessage(String.format("%15s is displaying...  \u00A2/unit - %5d, \u00A2/sec - %5.3f, duration - %5.2f min",
                 advertisement.getName(),
                 advertisement.getAmountPerOneDisplaying(),
                 advertisement.getAmountPerOneDisplaying() / (double) advertisement.getDuration(),
-                advertisement.getDuration()));
+                advertisement.getDuration()/60.0));
     }
 }

@@ -16,6 +16,10 @@ public class Order {
         this.cook = cook;
     }
 
+    public Cook getCook() {
+        return cook;
+    }
+
     public Order(Tablet tablet) throws IOException {
         this.tablet = tablet;
         initDishes();

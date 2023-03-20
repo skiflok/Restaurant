@@ -22,13 +22,13 @@ public class App {
         ConsoleHelper.writeMessage("it's a restaurant Restaurant");
 
         Waiter waiter = new Waiter();
+        waiter.setDelivery(DELIVERY);
 
         List<Cook> cooks = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             Cook cook = new Cook("Cook_" + i);
             cook.setOrders(ORDERS);
             cook.setDelivery(DELIVERY);
-            cook.addObserver(waiter);
             cooks.add(cook);
         }
 
@@ -38,6 +38,9 @@ public class App {
             tablet.setOrders(ORDERS);
             tablets.add(tablet);
         }
+
+        Thread waiterThread = new Thread(waiter);
+        waiterThread.start();
 
         List<Thread> cookThreads = new ArrayList<>();
         for (Cook cook : cooks) {

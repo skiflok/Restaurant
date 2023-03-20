@@ -8,7 +8,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Waiter implements Observer, Runnable {
+public class Waiter implements Runnable {
 
     private final Logger logger = Logger.getLogger(Waiter.class.getName());
 
@@ -18,16 +18,9 @@ public class Waiter implements Observer, Runnable {
         this.delivery = delivery;
     }
 
-    @Override
-    public void update(Observable cook, Object order) {
-
-        ConsoleHelper.writeMessage(order + "was cooked" + cook);
-
-    }
-
-    public void carryOrder () throws InterruptedException {
-        Order order = delivery.take();
-//        ConsoleHelper.writeMessage(order + "was cooked " + cook);
+    public void carryOrder (Order order) throws InterruptedException {
+        logger.log(Level.INFO, "Выдача заказа {0}", this.getClass().getSimpleName());
+        ConsoleHelper.writeMessage(order + "was cooked " + order.getCook().name);
     }
 
     @Override
@@ -37,7 +30,7 @@ public class Waiter implements Observer, Runnable {
             while (true) {
 
                 if (!delivery.isEmpty()) {
-                    carryOrder();
+                    carryOrder(delivery.take());
                 }
 
             }

@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class Cook extends Observable implements Runnable {
+public class Cook implements Runnable {
 
     private final Logger logger = Logger.getLogger(Cook.class.getName());
 
@@ -65,8 +65,8 @@ public class Cook extends Observable implements Runnable {
         } catch (InterruptedException ignored) {
 
         }
-        setChanged();
-        notifyObservers(order);
+        order.setCook(this);
+        delivery.offer(order);
         busy = false;
 
         logger.log(Level.INFO, "stop CookingOrder" + this.name);

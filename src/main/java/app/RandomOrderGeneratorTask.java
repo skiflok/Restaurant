@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class RandomOrderGeneratorTask implements Runnable {
 
-    private final Logger logger = Logger.getLogger(Cook.class.getName());
+    private final Logger logger = Logger.getLogger(RandomOrderGeneratorTask.class.getName());
 
     private List<Tablet> tablets;
     private int interval;

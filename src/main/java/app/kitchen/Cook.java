@@ -11,15 +11,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class Cook extends Observable implements Runnable {
+public class Cook implements Runnable {
 
-    private final static Logger logger = Logger.getLogger(Cook.class.getName());
+    private final Logger logger = Logger.getLogger(Cook.class.getName());
 
     String name;
 
     private boolean busy;
 
     private LinkedBlockingQueue<Order> orders;
+    private LinkedBlockingQueue<Order> delivery;
+
+    public void setDelivery(LinkedBlockingQueue<Order> delivery) {
+        this.delivery = delivery;
+    }
 
     public void setOrders(LinkedBlockingQueue<Order> orders) {
         this.orders = orders;
@@ -60,8 +65,8 @@ public class Cook extends Observable implements Runnable {
         } catch (InterruptedException ignored) {
 
         }
-        setChanged();
-        notifyObservers(order);
+        order.setCook(this);
+        delivery.offer(order);
         busy = false;
 
         logger.log(Level.INFO, "stop CookingOrder" + this.name);

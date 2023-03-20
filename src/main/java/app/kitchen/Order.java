@@ -10,6 +10,16 @@ public class Order {
     private final Tablet tablet;
     protected List<Dish> dishes;
 
+    private Cook cook;
+
+    public void setCook(Cook cook) {
+        this.cook = cook;
+    }
+
+    public Cook getCook() {
+        return cook;
+    }
+
     public Order(Tablet tablet) throws IOException {
         this.tablet = tablet;
         initDishes();

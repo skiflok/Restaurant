@@ -13,7 +13,7 @@ public class App {
     private static int ORDER_CREATING_INTERVAL = 100;
 
     private static final LinkedBlockingQueue<Order> ORDERS = new LinkedBlockingQueue<>(200);
-
+    private static final LinkedBlockingQueue<Order> DELIVERY = new LinkedBlockingQueue<>(200);
     //    private final static Logger logger = Logger.getLogger(Tablet.class.getName());
     public static void main(String[] args) {
 
@@ -22,13 +22,13 @@ public class App {
         ConsoleHelper.writeMessage("it's a restaurant Restaurant");
 
         Waiter waiter = new Waiter();
+        waiter.setDelivery(DELIVERY);
 
         List<Cook> cooks = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             Cook cook = new Cook("Cook_" + i);
             cook.setOrders(ORDERS);
-
-            cook.addObserver(waiter);
+            cook.setDelivery(DELIVERY);
             cooks.add(cook);
         }
 
@@ -38,6 +38,9 @@ public class App {
             tablet.setOrders(ORDERS);
             tablets.add(tablet);
         }
+
+        Thread waiterThread = new Thread(waiter);
+        waiterThread.start();
 
         List<Thread> cookThreads = new ArrayList<>();
         for (Cook cook : cooks) {

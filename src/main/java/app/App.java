@@ -71,3 +71,9 @@ public class App {
 
     }
 }
+
+
+// TODO MVC application
+// TODO TESTS
+// TODO BD postgresSQL
+// TODO Spring
